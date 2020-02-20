@@ -3,9 +3,11 @@ import random
 VOWELS = ["a", "e", "i", "o", "u"]
 
 with open("dictionary/verbs.txt") as verbfile:
+
     VERBS = [line.strip() for line in verbfile]
 
 with open("dictionary/nouns.txt") as nounfile:
+
     NOUNS = [line.strip() for line in nounfile]
 
 with open("dictionary/adverbs.txt") as adverbfile:

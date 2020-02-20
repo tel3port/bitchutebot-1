@@ -11,6 +11,7 @@ TODO:
 """
 import random
 import words
+import globals
 
 # all regular and singular, for now
 C_CONJ = ["and", "but", "for", "or", "so", "yet"] # Coordinating conjunctions
@@ -102,6 +103,8 @@ class Sentence(Phrase):
         content = " ".join(self.words) + "."
         return content.capitalize()
 
+
 if __name__ == '__main__':
     n = Sentence()
-    print(n)
+    final_sentence = f"This is absolutely {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {globals.single_lander_source()}"
+    print(final_sentence)
