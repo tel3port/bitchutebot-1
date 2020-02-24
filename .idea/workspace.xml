@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="de3e2952-5c18-47bf-9a42-b272e82ea5ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.directory" beforeDir="false" afterPath="$PROJECT_DIR$/.directory" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/m.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/m.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainScript.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainScript.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/complements.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dictionary/complements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/descs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dictionary/descs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phrases.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dictionary/static_phrase_list.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phrases.py" beforeDir="false" afterPath="$PROJECT_DIR$/phrases.py" afterDir="false" />
-    </list>
+    <list default="true" id="de3e2952-5c18-47bf-9a42-b272e82ea5ea" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
