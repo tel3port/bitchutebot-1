@@ -39,6 +39,10 @@ class BitchuteBot:
         self. base_url = "https://www.bitchute.com"
         self.login()
 
+    @staticmethod
+    def exit_application():
+        os.system("python restart.py")
+
     def login(self):
         print("logging me in....")
         print("session id at login: ", self.driver.session_id)
