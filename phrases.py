@@ -104,7 +104,4 @@ class Sentence(Phrase):
         return content.capitalize()
 
 
-if __name__ == '__main__':
-    n = Sentence()
-    final_sentence = f"This is absolutely {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {globals.single_lander_source()}"
-    print(final_sentence)
+

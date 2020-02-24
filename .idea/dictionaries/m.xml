@@ -3,7 +3,11 @@
     <words>
       <w>adjectivefile</w>
       <w>adverbfile</w>
+      <w>compfile</w>
+      <w>descfile</w>
+      <w>descs</w>
       <w>nounfile</w>
+      <w>phrasefile</w>
       <w>verbfile</w>
     </words>
   </dictionary>
