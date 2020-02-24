@@ -44,7 +44,6 @@ class BitchuteBot:
         os.system("python restart.py")
 
     def login(self):
-        print("logging me in....")
         print("session id at login: ", self.driver.session_id)
 
         try:
@@ -67,6 +66,5 @@ class BitchuteBot:
 
 if __name__ == '__main__':
     n = p.Sentence()
-    final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
-    print(final_sentence)
+    # final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
 
