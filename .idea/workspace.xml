@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/complements.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dictionary/complements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/descs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dictionary/descs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/phrases.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dictionary/static_phrase_list.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phrases.py" beforeDir="false" afterPath="$PROJECT_DIR$/phrases.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
