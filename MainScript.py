@@ -4,7 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 import phrases as p
-import random
+import time
+from random import randint
 import words
 import globals as gls
 import os
@@ -36,7 +37,7 @@ class BitchuteBot:
         # chrome_options.add_argument("--headless")
         # self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         self.driver = webdriver.Chrome("./chromedriver", options=chrome_options)
-        self. base_url = "https://www.bitchute.com"
+        self. base_url = "https://www.bitchute.com/"
         self.login()
 
     @staticmethod
@@ -48,7 +49,7 @@ class BitchuteBot:
 
         try:
 
-            self.driver.get(f"{self.base_url}/")
+            self.driver.get(f"{self.base_url}")
 
             login_element = self.driver.find_element_by_link_text("Login")
             self.driver.implicitly_wait(10)
@@ -68,9 +69,58 @@ class BitchuteBot:
             print(traceback.format_exc())
             pass
 
+    def infinite_scroll(self):
+        print("starting infinite scroll")
+        popular_tab_xpath = '//*[contains(@href,"#listing-popular")]'
+        gls.sleep_time()
+        try:
+            print("session id at infinite scroll: ", self.driver.session_id)
+            self.driver.get(self.base_url)
+            gls.sleep_time()
+            self.driver.find_element_by_xpath(popular_tab_xpath).click()
+
+            gls.sleep_time()
+            count = 0
+            scroll_pause_time = 6
+
+            # Get scroll height
+            last_height = self.driver.execute_script("return document.body.scrollHeight")
+            gls.sleep_time()
+
+            random_num = randint(3, 7)
+            while True:
+                # Scroll down to bottom
+                self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+                # Wait to load page
+                time.sleep(scroll_pause_time)
+
+                # Calculate new scroll height and compare with last scroll height
+                new_height = self.driver.execute_script("return document.body.scrollHeight")
+                gls.sleep_time()
+
+                if new_height == last_height:
+                    break
+                last_height = new_height
+
+                count += 1
+                print(f'number of scrolls', count)
+                if count == random_num:
+                    break
+
+        except Exception as em:
+            print('infinite_scroll Error occurred ' + str(em))
+            print(traceback.format_exc())
+            pass
+
+        finally:
+            print(" infinite_scroll() done")
+
 
 if __name__ == '__main__':
     bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
+
+    bt_bot.infinite_scroll()
 
     n = p.Sentence()
     # final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
