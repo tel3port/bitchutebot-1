@@ -116,11 +116,30 @@ class BitchuteBot:
         finally:
             print(" infinite_scroll() done")
 
+    def link_extractor(self):
+        links_set = set()
+
+        results = self.driver.find_elements_by_xpath('//a[@href]')
+
+        print(f"number of video links {len(results)}")
+
+        for res in results:
+            final_link = res.get_attribute('href')
+            links_set.add(final_link)
+
+        for single_link in list(links_set):
+            if '/video/' in single_link:
+                print(single_link)
+
+                time.sleep(randint(10, 15))
+
 
 if __name__ == '__main__':
     bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
 
     bt_bot.infinite_scroll()
+
+    bt_bot.link_extractor()
 
     n = p.Sentence()
     # final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
