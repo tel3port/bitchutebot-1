@@ -48,14 +48,19 @@ class BitchuteBot:
 
         try:
 
-            self.driver.get(f"{self.base_url}/login/")
-            WebDriverWait(self.driver, 25).until(EC.element_to_be_clickable((By.NAME, "id")))
+            self.driver.get(f"{self.base_url}/")
+
+            login_element = self.driver.find_element_by_link_text("Login")
+            self.driver.implicitly_wait(10)
+            login_element.click()
 
             # fill up the credential fields
-            self.driver.find_element_by_name('id').send_keys(self.username)
+            gls.sleep_time()
+            self.driver.find_element_by_name('username').send_keys(self.username)
+            gls.sleep_time()
             self.driver.find_element_by_name('password').send_keys(self.password)
-
-            self.driver.find_element_by_xpath('//*[contains(@type,"submit")]').click()
+            gls.sleep_time()
+            self.driver.find_element_by_xpath('//*[contains(@id,"auth_submit")]').click()
 
             print("login success...")
         except Exception as e:
@@ -65,6 +70,8 @@ class BitchuteBot:
 
 
 if __name__ == '__main__':
+    bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
+
     n = p.Sentence()
     # final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
 

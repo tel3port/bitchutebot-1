@@ -1,4 +1,5 @@
 from random import randint
+import time
 
 
 def single_lander_source():
@@ -14,3 +15,12 @@ def single_lander_source():
                        ]
 
     return list_of_landers[randint(0, len(list_of_landers) - 1)]
+
+
+def sleep_time():
+    t = randint(7, 15)
+    print(f"thread sleeping for {t} seconds...")
+
+    time.sleep(t)
+
+    return t
