@@ -157,9 +157,29 @@ class BitchuteBot:
         finally:
             print(" subscribr() done")
 
-
     def liker_and_faver(self, video_link):
-        pass
+
+        try:
+            gls.sleep_time()
+            self.driver.get(video_link)
+            gls.sleep_time()
+            like_element = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.ID, 'video-like-off')))
+            gls.sleep_time()
+            like_element.click()
+
+            print("video liked!")
+            gls.sleep_time()
+            star_xpath = '//*[contains(@data-original-title,"Favorite")]'
+            fav_element = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, star_xpath)))
+            gls.sleep_time()
+            fav_element.click()
+            print("video faved!")
+        except Exception as em:
+            print('liker_and_faver Error occurred ' + str(em))
+            print(traceback.format_exc())
+
+        finally:
+            print("liker_and_faver() done")
 
     def commentr(self, video_link):
         pass
@@ -173,7 +193,9 @@ if __name__ == '__main__':
 
     # bt_bot.link_extractor()
 
-    bt_bot.subscribr("https://www.bitchute.com/video/B5KfIpdH96YE/")
+    # bt_bot.subscribr("https://www.bitchute.com/video/B5KfIpdH96YE/")
+
+    bt_bot.liker_and_faver("https://www.bitchute.com/video/NEyQXHup--Q/")
 
     # n = p.Sentence()
     # final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
