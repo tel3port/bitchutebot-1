@@ -12,14 +12,15 @@ import os
 import traceback
 
 with open("dictionary/complements.txt") as compfile:
-
+    global COMPLEMENTS
     COMPLEMENTS = [line.strip() for line in compfile]
 
 with open("dictionary/descs.txt") as descfile:
-
+    global DESCS
     DESCS = [line.strip() for line in descfile]
 
 with open("dictionary/static_phrase_list.txt") as phrasefile:
+    global STATIC_PHRASES
     STATIC_PHRASES = [line.strip() for line in phrasefile]
 
 
@@ -119,6 +120,9 @@ class BitchuteBot:
     def link_extractor(self):
         links_set = set()
 
+        global sorted_links_list
+        sorted_links_list = []
+
         results = self.driver.find_elements_by_xpath('//a[@href]')
 
         print(f"number of video links {len(results)}")
@@ -130,17 +134,47 @@ class BitchuteBot:
         for single_link in list(links_set):
             if '/video/' in single_link:
                 print(single_link)
+                sorted_links_list.append(single_link)
 
                 time.sleep(randint(10, 15))
 
+    def subscribr(self, video_link):
+
+        try:
+            gls.sleep_time()
+            self.driver.get(video_link)
+            gls.sleep_time()
+            button_xpath = "//button[contains(.,'Subscribe')]"
+            element = WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, button_xpath)))
+            gls.sleep_time()
+            element.click()
+
+        except Exception as em:
+            print('subscribr Error occurred ' + str(em))
+            print(traceback.format_exc())
+            pass
+
+        finally:
+            print(" subscribr() done")
+
+
+    def liker_and_faver(self, video_link):
+        pass
+
+    def commentr(self, video_link):
+        pass
+
 
 if __name__ == '__main__':
+
     bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
 
-    bt_bot.infinite_scroll()
+    # bt_bot.infinite_scroll()
 
-    bt_bot.link_extractor()
+    # bt_bot.link_extractor()
 
-    n = p.Sentence()
+    bt_bot.subscribr("https://www.bitchute.com/video/B5KfIpdH96YE/")
+
+    # n = p.Sentence()
     # final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
 
