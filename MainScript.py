@@ -46,6 +46,20 @@ class BitchuteBot:
     def exit_application():
         os.system("python restart.py")
 
+    @staticmethod
+    def response_generator():
+        n = p.Sentence()
+        gend_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
+        random_comp = COMPLEMENTS[randint(0, len(COMPLEMENTS) - 1)]
+        random_phrase = STATIC_PHRASES[randint(0, len(STATIC_PHRASES) - 1)]
+        random_desc = DESCS[randint(0, len(DESCS) - 1)]
+
+        response_list = [gend_sentence, random_comp, random_phrase, random_desc]
+
+        random_response = response_list[randint(0, len(response_list) - 1)]
+
+        return random_response
+
     def login(self):
         print("session id at login: ", self.driver.session_id)
 
@@ -139,6 +153,8 @@ class BitchuteBot:
 
                 time.sleep(randint(10, 15))
 
+        return sorted_links_list
+
     def subscribr(self, video_link):
 
         try:
@@ -183,8 +199,8 @@ class BitchuteBot:
             print("liker_and_faver() done")
 
     def commentr(self, video_link, single_comment):
-        comment_textbox_xpath = '//*[contains(@aria-label,"Start the discussion…")]'
-        placeholder_xpath = "//span[contains(@class,'placeholder')]"
+        disqus_iframe_xpath = '//*[contains(@title,"Disqus")]'
+        btn_xpath = "//button[contains(.,'Post as')]"
 
         try:
             gls.sleep_time()
@@ -193,12 +209,12 @@ class BitchuteBot:
             self.driver.execute_script("window.scrollBy(0,500)", "")
             gls.sleep_time()
 
-            self.driver.switch_to.frame(self.driver.find_element_by_xpath('//*[contains(@title,"Disqus")]'))
+            self.driver.switch_to.frame(self.driver.find_element_by_xpath(disqus_iframe_xpath))
             self.driver.find_element_by_class_name('placeholder').click()
             gls.sleep_time()
             self.driver.find_element_by_class_name('textarea').send_keys(single_comment)
             gls.sleep_time()
-            self.driver.find_element_by_xpath("//button[contains(.,'Post as')]").click()
+            self.driver.find_element_by_xpath(btn_xpath).click()
 
         except Exception as em:
             print('commentr Error occurred ' + str(em))
@@ -209,18 +225,25 @@ class BitchuteBot:
 
 
 if __name__ == '__main__':
-    n = p.Sentence()
-    final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
 
     bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
 
     bt_bot.infinite_scroll()  # to load video urls for extraction
 
-    bt_bot.link_extractor()
+    v_links = bt_bot.link_extractor()
 
-    bt_bot.subscribr("https://www.bitchute.com/video/B5KfIpdH96YE/")
+    if len(v_links) != 0:
 
-    bt_bot.liker_and_faver("https://www.bitchute.com/video/NEyQXHup--Q/")
+        for v_link in v_links:
 
-    bt_bot.commentr("https://www.bitchute.com/video/WXcTCMQ6fuvB/", final_sentence)
+            bt_bot.subscribr(v_link)
+
+            bt_bot.liker_and_faver(v_link)
+
+            random_response = bt_bot.response_generator()
+
+            bt_bot.commentr(v_link, random_response)
+
+    else:
+        print("no video links collected")
 
