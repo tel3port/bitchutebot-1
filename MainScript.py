@@ -11,6 +11,7 @@ import globals as gls
 import os
 import traceback
 import random
+import heroku3
 
 import schedule
 with open("dictionary/complements.txt") as compfile:
@@ -45,7 +46,9 @@ class BitchuteBot:
 
     @staticmethod
     def restart_application():
-        os.system("python restart.py")
+        heroku_conn = heroku3.from_key('b477d2e0-d1ba-48b1-a2df-88d87db973e7')
+        app = heroku_conn.apps()['bitchute-bot-1']
+        app.restart()
 
     @staticmethod
     def response_generator():
@@ -252,13 +255,15 @@ if __name__ == '__main__':
 
                 count += 1
 
-                if count == 800:
+                # TODO CHANGE BACK TO 800 BEFORE DEPLOYING
+                if count == 5:
                     break
 
         else:
             print("no video links collected")
 
-        bt_bot.restart_application()
+        #TODO FIX THIS METHOD BEFORE DEPLOYING TO POINT TO CORRECT APP
+        # bt_bot.restart_application()
 
 
     def custom_bitchute_scheduler():
@@ -274,6 +279,8 @@ if __name__ == '__main__':
             print(traceback.format_exc())
             pass
 
+
+    #custom_bitchute_scheduler()
 
     def run_locally():
         bitchute_action_sequence()
