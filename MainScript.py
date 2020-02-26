@@ -10,6 +10,7 @@ import words
 import globals as gls
 import os
 import traceback
+import random
 
 with open("dictionary/complements.txt") as compfile:
     global COMPLEMENTS
@@ -181,22 +182,45 @@ class BitchuteBot:
         finally:
             print("liker_and_faver() done")
 
-    def commentr(self, video_link):
-        pass
+    def commentr(self, video_link, single_comment):
+        comment_textbox_xpath = '//*[contains(@aria-label,"Start the discussion…")]'
+        placeholder_xpath = "//span[contains(@class,'placeholder')]"
+
+        try:
+            gls.sleep_time()
+            self.driver.get(video_link)
+            gls.sleep_time()
+            self.driver.execute_script("window.scrollBy(0,500)", "")
+            gls.sleep_time()
+
+            self.driver.switch_to.frame(self.driver.find_element_by_xpath('//*[contains(@title,"Disqus")]'))
+            self.driver.find_element_by_class_name('placeholder').click()
+            gls.sleep_time()
+            self.driver.find_element_by_class_name('textarea').send_keys(single_comment)
+            gls.sleep_time()
+            self.driver.find_element_by_xpath("//button[contains(.,'Post as')]").click()
+
+        except Exception as em:
+            print('commentr Error occurred ' + str(em))
+            print(traceback.format_exc())
+
+        finally:
+            print("commentr() done")
 
 
 if __name__ == '__main__':
+    n = p.Sentence()
+    final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
 
     bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
 
-    # bt_bot.infinite_scroll()
+    bt_bot.infinite_scroll()  # to load video urls for extraction
 
-    # bt_bot.link_extractor()
+    bt_bot.link_extractor()
 
-    # bt_bot.subscribr("https://www.bitchute.com/video/B5KfIpdH96YE/")
+    bt_bot.subscribr("https://www.bitchute.com/video/B5KfIpdH96YE/")
 
     bt_bot.liker_and_faver("https://www.bitchute.com/video/NEyQXHup--Q/")
 
-    # n = p.Sentence()
-    # final_sentence = f"This is kinda {random.choice(words.ADJECTIVES)}. {n}. Learn more at: {gls.single_lander_source()}"
+    bt_bot.commentr("https://www.bitchute.com/video/WXcTCMQ6fuvB/", final_sentence)
 
