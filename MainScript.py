@@ -12,6 +12,7 @@ import os
 import traceback
 import random
 
+import schedule
 with open("dictionary/complements.txt") as compfile:
     global COMPLEMENTS
     COMPLEMENTS = [line.strip() for line in compfile]
@@ -43,7 +44,7 @@ class BitchuteBot:
         self.login()
 
     @staticmethod
-    def exit_application():
+    def restart_application():
         os.system("python restart.py")
 
     @staticmethod
@@ -56,9 +57,7 @@ class BitchuteBot:
 
         response_list = [gend_sentence, random_comp, random_phrase, random_desc]
 
-        random_response = response_list[randint(0, len(response_list) - 1)]
-
-        return random_response
+        return response_list[randint(0, len(response_list) - 1)]
 
     def login(self):
         print("session id at login: ", self.driver.session_id)
@@ -226,24 +225,54 @@ class BitchuteBot:
 
 if __name__ == '__main__':
 
-    bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
+    def bitchute_action_sequence():
+        count = 0
 
-    bt_bot.infinite_scroll()  # to load video urls for extraction
+        bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
 
-    v_links = bt_bot.link_extractor()
+        bt_bot.infinite_scroll()  # to load video urls for extraction
 
-    if len(v_links) != 0:
+        v_links = bt_bot.link_extractor()
 
-        for v_link in v_links:
+        print(f'number of video links extracted: {len(v_links)}')
 
-            bt_bot.subscribr(v_link)
+        if len(v_links) != 0:
 
-            bt_bot.liker_and_faver(v_link)
+            for v_link in v_links:
 
-            random_response = bt_bot.response_generator()
+                bt_bot.subscribr(v_link)
 
-            bt_bot.commentr(v_link, random_response)
+                bt_bot.liker_and_faver(v_link)
 
-    else:
-        print("no video links collected")
+                random_response = bt_bot.response_generator()
 
+                bt_bot.commentr(v_link, random_response)
+                count += 1
+
+                if count == 800:
+                    break
+
+        else:
+            print("no video links collected")
+
+        bt_bot.restart_application()
+
+
+    def custom_bitchute_scheduler():
+        try:
+            schedule.every().day.at("08:30").do(bitchute_action_sequence)
+
+            while True:
+                schedule.run_pending()
+                time.sleep(1)
+
+        except Exception as e:
+            print('custom_bitchute_scheduler Error occurred ' + str(e))
+            print(traceback.format_exc())
+            pass
+
+
+    def run_locally():
+        bitchute_action_sequence()
+
+    run_locally()
