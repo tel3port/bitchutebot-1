@@ -102,7 +102,7 @@ class BitchuteBot:
             last_height = self.driver.execute_script("return document.body.scrollHeight")
             gls.sleep_time()
 
-            random_num = randint(3, 7)
+            random_num = randint(5, 10)
             while True:
                 # Scroll down to bottom
                 self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -238,15 +238,18 @@ if __name__ == '__main__':
 
         if len(v_links) != 0:
 
-            for v_link in v_links:
+            for _ in range(len(v_links)):
+                single_video_link = random.choice(v_links)
+                print(f'video being worked on: {single_video_link}')
 
-                bt_bot.subscribr(v_link)
+                bt_bot.subscribr(single_video_link)
 
-                bt_bot.liker_and_faver(v_link)
+                bt_bot.liker_and_faver(single_video_link)
 
                 random_response = bt_bot.response_generator()
 
-                bt_bot.commentr(v_link, random_response)
+                bt_bot.commentr(single_video_link, random_response)
+
                 count += 1
 
                 if count == 800:
