@@ -28,9 +28,10 @@ with open("dictionary/static_phrase_list.txt") as phrasefile:
 
 
 class BitchuteBot:
-    def __init__(self, username, password):
+    def __init__(self, username, password,bot_name):
         self.username = username
         self.password = password
+        self.bot_name = bot_name
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         chrome_options.add_argument("--disable-dev-sgm-usage")
@@ -44,10 +45,9 @@ class BitchuteBot:
         self. base_url = "https://www.bitchute.com/"
         self.login()
 
-    @staticmethod
-    def restart_application():
+    def restart_application(self):
         heroku_conn = heroku3.from_key('b477d2e0-d1ba-48b1-a2df-88d87db973e7')
-        app = heroku_conn.apps()['bitchute-bot-1']
+        app = heroku_conn.apps()[self.bot_name]
         app.restart()
 
     @staticmethod
@@ -58,7 +58,7 @@ class BitchuteBot:
         random_phrase = STATIC_PHRASES[randint(0, len(STATIC_PHRASES) - 1)]
         random_desc = DESCS[randint(0, len(DESCS) - 1)]
 
-        response_list = [gend_sentence, random_comp, random_phrase, random_desc]
+        response_list = [gend_sentence, random_comp, f"{random_phrase} {gls.single_lander_source()}", random_desc]
 
         return response_list[randint(0, len(response_list) - 1)]
 
@@ -230,7 +230,7 @@ if __name__ == '__main__':
     def bitchute_action_sequence():
         count = 0
 
-        bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J")
+        bt_bot = BitchuteBot("saber2k", "W4e@qmMkyCrwM%J", 'bitchute-bot-1')
 
         bt_bot.infinite_scroll()  # to load video urls for extraction
 
