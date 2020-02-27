@@ -89,13 +89,13 @@ class BitchuteBot:
 
     def infinite_scroll(self):
         print("starting infinite scroll")
-        popular_tab_xpath = '//*[contains(@href,"#listing-popular")]'
+        tab_xpath = '//*[contains(@href,"#listing-all")]'
         gls.sleep_time()
         try:
             print("session id at infinite scroll: ", self.driver.session_id)
             self.driver.get(self.base_url)
             gls.sleep_time()
-            self.driver.find_element_by_xpath(popular_tab_xpath).click()
+            self.driver.find_element_by_xpath(tab_xpath).click()
 
             gls.sleep_time()
             count = 0
