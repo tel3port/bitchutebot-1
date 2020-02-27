@@ -265,7 +265,7 @@ if __name__ == '__main__':
 
     def custom_bitchute_scheduler():
         try:
-            schedule.every().day.at("08:30").do(bitchute_action_sequence)
+            schedule.every().day.at("01:30").do(bitchute_action_sequence)
 
             while True:
                 schedule.run_pending()
