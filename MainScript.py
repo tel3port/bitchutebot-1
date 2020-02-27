@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
 import phrases as p
 import time
 from random import randint
@@ -12,6 +11,7 @@ import os
 import traceback
 import random
 import heroku3
+import requests
 
 import schedule
 with open("dictionary/complements.txt") as compfile:
@@ -153,8 +153,6 @@ class BitchuteBot:
                 print(single_link)
                 sorted_links_list.append(single_link)
 
-                time.sleep(randint(10, 15))
-
         return sorted_links_list
 
     def subscribr(self, video_link):
@@ -203,6 +201,7 @@ class BitchuteBot:
     def commentr(self, video_link, single_comment):
         disqus_iframe_xpath = '//*[contains(@title,"Disqus")]'
         btn_xpath = "//button[contains(.,'Post as')]"
+        print(f"single comment {single_comment}")
 
         try:
             gls.sleep_time()
@@ -255,15 +254,13 @@ if __name__ == '__main__':
 
                 count += 1
 
-                # TODO CHANGE BACK TO 800 BEFORE DEPLOYING
-                if count == 5:
+                if count == 700:
                     break
 
         else:
             print("no video links collected")
 
-        #TODO FIX THIS METHOD BEFORE DEPLOYING TO POINT TO CORRECT APP
-        # bt_bot.restart_application()
+        bt_bot.restart_application()
 
 
     def custom_bitchute_scheduler():
@@ -280,9 +277,11 @@ if __name__ == '__main__':
             pass
 
 
-    #custom_bitchute_scheduler()
+    custom_bitchute_scheduler()
 
-    def run_locally():
+
+    def test_locally():
         bitchute_action_sequence()
 
-    run_locally()
+    # test_locally()
+
