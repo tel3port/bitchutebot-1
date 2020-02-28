@@ -38,9 +38,9 @@ class BitchuteBot:
         chrome_options.add_argument("--start-maximized")
         # prefs = {"profile.managed_default_content_settings.images": 2}
         # chrome_options.add_experimental_option("prefs", prefs)
-        chrome_options.add_argument("--headless")
-        self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
-        # self.driver = webdriver.Chrome("./chromedriver", options=chrome_options)
+        # chrome_options.add_argument("--headless")
+        # self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+        self.driver = webdriver.Chrome("./chromedriver", options=chrome_options)
         self. base_url = "https://www.bitchute.com/"
         self.login()
 
@@ -205,10 +205,7 @@ class BitchuteBot:
         try:
             gls.sleep_time()
             self.driver.get(video_link)
-            gls.sleep_time()
             self.driver.execute_script("window.scrollBy(0,800)", "")
-            gls.sleep_time()
-
             self.driver.switch_to.frame(self.driver.find_element_by_xpath(disqus_iframe_xpath))
             placeholder_element = WebDriverWait(self.driver, 25).until(EC.element_to_be_clickable((By.CLASS_NAME, 'placeholder')))
             gls.sleep_time()
