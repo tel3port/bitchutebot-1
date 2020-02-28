@@ -217,8 +217,7 @@ class BitchuteBot:
             gls.sleep_time()
             textarea_element.send_keys(single_comment)
             gls.sleep_time()
-            btn_element = WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located((By.XPATH, btn_xpath)))
-            gls.sleep_time()
+            btn_element = WebDriverWait(self.driver, 25).until(EC.visibility_of_element_located((By.XPATH, btn_xpath)))
             btn_element.click()
 
         except Exception as em:
