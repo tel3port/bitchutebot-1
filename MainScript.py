@@ -13,7 +13,6 @@ import random
 import heroku3
 import requests
 
-import schedule
 with open("dictionary/complements.txt") as compfile:
     global COMPLEMENTS
     COMPLEMENTS = [line.strip() for line in compfile]
