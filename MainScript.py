@@ -215,7 +215,7 @@ class BitchuteBot:
             WebDriverWait(self.driver, 20).until(EC.frame_to_be_available_and_switch_to_it(
                 (By.XPATH, "//iframe[starts-with(@id,'dsq-app') and @title='Disqus']")))
             WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(
-                (By.XPATH, "//div[@class='textarea'][contains(@aria-label,'Join the discussion')]"))).send_keys(
+                (By.XPATH, "//div[@class='textarea'][contains(@aria-label,'the discussion')]"))).send_keys(
                 single_comment)
             btn_element = self.driver.find_element_by_xpath(btn_xpath)
             gls.sleep_time()
