@@ -202,10 +202,6 @@ class BitchuteBot:
         btn_xpath = "//button[contains(.,'Post as')]"
         print(f"single comment {single_comment}")
 
-        WebDriverWait(self.driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//iframe[@class='disq2disqusCommentsHolder']")))
-        WebDriverWait(self.driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//iframe[starts-with(@id,'dsq-app') and @title='Disqus']")))
-        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='textarea'][contains(@aria-label,'the discussion')]"))).send_keys(single_comment)
-
         try:
             gls.sleep_time()
             self.driver.get(video_link)
