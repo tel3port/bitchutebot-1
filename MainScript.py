@@ -27,7 +27,7 @@ with open("dictionary/static_phrase_list.txt") as phrasefile:
 
 
 class BitchuteBot:
-    def __init__(self, username, password,bot_name):
+    def __init__(self, username, password, bot_name):
         self.username = username
         self.password = password
         self.bot_name = bot_name
@@ -252,7 +252,7 @@ if __name__ == '__main__':
 
                 count += 1
 
-                if count == 700:
+                if count == 400:
                     break
 
         else:
