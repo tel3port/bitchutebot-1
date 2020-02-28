@@ -260,28 +260,31 @@ if __name__ == '__main__':
         else:
             print("no video links collected")
 
+        time.sleep(randint(25000, 29000))
+
         bt_bot.restart_application()
 
+    bitchute_action_sequence()
 
-    def custom_bitchute_scheduler():
-        try:
-            schedule.every().day.at("01:30").do(bitchute_action_sequence)
-
-            while True:
-                schedule.run_pending()
-                time.sleep(1)
-
-        except Exception as e:
-            print('custom_bitchute_scheduler Error occurred ' + str(e))
-            print(traceback.format_exc())
-            pass
-
-
-    custom_bitchute_scheduler()
-
-
-    def test_locally():
-        bitchute_action_sequence()
+    # def custom_bitchute_scheduler():
+    #     try:
+    #         schedule.every().day.at("01:30").do(bitchute_action_sequence)
+    #
+    #         while True:
+    #             schedule.run_pending()
+    #             time.sleep(1)
+    #
+    #     except Exception as e:
+    #         print('custom_bitchute_scheduler Error occurred ' + str(e))
+    #         print(traceback.format_exc())
+    #         pass
+    #
+    #
+    # custom_bitchute_scheduler()
+    #
+    #
+    # def test_locally():
+    #     bitchute_action_sequence()
 
     # test_locally()
 
