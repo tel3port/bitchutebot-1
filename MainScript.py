@@ -36,8 +36,8 @@ class BitchuteBot:
         chrome_options.add_argument("--disable-dev-sgm-usage")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--start-maximized")
-        prefs = {"profile.managed_default_content_settings.images": 2}
-        chrome_options.add_experimental_option("prefs", prefs)
+        # prefs = {"profile.managed_default_content_settings.images": 2}
+        # chrome_options.add_experimental_option("prefs", prefs)
         chrome_options.add_argument("--headless")
         self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
         # self.driver = webdriver.Chrome("./chromedriver", options=chrome_options)
@@ -217,7 +217,7 @@ class BitchuteBot:
             gls.sleep_time()
             textarea_element.send_keys(single_comment)
             gls.sleep_time()
-            btn_element = self.driver.find_element_by_xpath(btn_xpath)
+            btn_element = WebDriverWait(self.driver, 15).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, btn_xpath)))
             gls.sleep_time()
             btn_element.click()
 
