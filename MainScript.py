@@ -217,10 +217,9 @@ class BitchuteBot:
             gls.sleep_time()
             textarea_element.send_keys(single_comment)
             gls.sleep_time()
-            btn_element = WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located((By.XPATH, btn_xpath)))
+            btn_element = self.driver.find_element_by_xpath(btn_xpath)
             gls.sleep_time()
             btn_element.click()
-            self.driver.find_element_by_xpath(btn_xpath).click()
 
         except Exception as em:
             print('commentr Error occurred ' + str(em))
