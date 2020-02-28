@@ -210,9 +210,14 @@ class BitchuteBot:
             gls.sleep_time()
 
             self.driver.switch_to.frame(self.driver.find_element_by_xpath(disqus_iframe_xpath))
-            self.driver.find_element_by_class_name('placeholder').click()
+            placeholder_element = WebDriverWait(self.driver, 25).until(EC.element_to_be_clickable((By.CLASS_NAME, 'placeholder')))
             gls.sleep_time()
-            self.driver.find_element_by_class_name('textarea').send_keys(single_comment)
+            placeholder_element.click()
+            # self.driver.find_element_by_class_name('placeholder').click()
+            textarea_element = WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located((By.CLASS_NAME, 'textarea')))
+            gls.sleep_time()
+            textarea_element.send_keys(single_comment)
+            # self.driver.find_element_by_class_name('textarea').send_keys(single_comment)
             gls.sleep_time()
             self.driver.find_element_by_xpath(btn_xpath).click()
 
