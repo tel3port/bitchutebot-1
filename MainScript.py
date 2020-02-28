@@ -211,7 +211,7 @@ class BitchuteBot:
             # placeholder_element.click()
             # textarea_element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, 'textarea')))
             # textarea_element.send_keys(single_comment)
-            WebDriverWait(self.driver, 20).until( EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//iframe[@class='disq2disqusCommentsHolder']")))
+            WebDriverWait(self.driver, 20).until( EC.frame_to_be_available_and_switch_to_it((By.XPATH, disqus_iframe_xpath)))
             WebDriverWait(self.driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//iframe[starts-with(@id,'dsq-app') and @title='Disqus']")))
             WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='textarea'][contains(@aria-label,'the discussion')]"))).send_keys(single_comment)
             btn_element = self.driver.find_element_by_xpath(btn_xpath)
