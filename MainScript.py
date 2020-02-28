@@ -206,7 +206,7 @@ class BitchuteBot:
             gls.sleep_time()
             self.driver.get(video_link)
             gls.sleep_time()
-            self.driver.execute_script("window.scrollBy(0,500)", "")
+            self.driver.execute_script("window.scrollBy(0,800)", "")
             gls.sleep_time()
 
             self.driver.switch_to.frame(self.driver.find_element_by_xpath(disqus_iframe_xpath))
