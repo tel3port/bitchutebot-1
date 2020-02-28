@@ -18,7 +18,7 @@ def single_lander_source():
 
 
 def sleep_time():
-    t = randint(7, 15)
+    t = randint(3, 7)
     print(f"thread sleeping for {t} seconds...")
 
     time.sleep(t)
